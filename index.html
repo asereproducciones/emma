@@ -562,7 +562,10 @@ async function callEmma(overrideContent) {
     })
   });
 
-  if (!res.ok) throw new Error('API error ' + res.status);
+  if (!res.ok) {
+  const errData = await res.json().catch(() => ({}));
+  throw new Error('API ' + res.status + ': ' + (errData.error?.message || JSON.stringify(errData)));
+}
   const data = await res.json();
   return data.content[0].text;
 }
