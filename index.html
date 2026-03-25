@@ -523,7 +523,7 @@ async function sendMessage() {
     speakEmma(extractMainText(reply));
   } catch (e) {
     hideTyping();
-    addErrorMessage('No se pudo conectar. Verifica tu conexión.');
+    addErrorMessage('Error: ' + e.message);
   }
 
   setProcessing(false);
